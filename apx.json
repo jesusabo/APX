@@ -1,0 +1,12 @@
+{
+    "component": "r2artifact",
+    "repoName": "eecc_search",
+    "uuaa": "pndf",
+    "slave_label": "apx",
+    "extra_properties": null,
+    "apxrepoBranch": "master",
+    "componentPaaSId": "eecc_search",
+    "appPaaSId": "pndf",
+    "proyectPaaSId": "pe.pndf.app-id-195695.dsg",
+    "resource_type": "du_online"
+}

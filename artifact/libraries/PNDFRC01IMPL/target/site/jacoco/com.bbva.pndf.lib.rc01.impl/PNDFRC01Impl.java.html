@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PNDFRC01Impl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PNDFRC01IMPL</a> &gt; <a href="index.source.html" class="el_package">com.bbva.pndf.lib.rc01.impl</a> &gt; <span class="el_source">PNDFRC01Impl.java</span></div><h1>PNDFRC01Impl.java</h1><pre class="source lang-java linenums">package com.bbva.pndf.lib.rc01.impl;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * The PNDFRC01Impl class...
+ */
+<span class="fc" id="L9">public class PNDFRC01Impl extends PNDFRC01Abstract {</span>
+
+<span class="fc" id="L11">	private static final Logger LOGGER = LoggerFactory.getLogger(PNDFRC01Impl.class);</span>
+
+	/**
+	 * The execute method...
+	 */
+	@Override
+	public  String executeGetCodio(String codigo) {
+		// TODO - Implementation of business logic
+<span class="fc" id="L19">		LOGGER.info(&quot;[PNDFRC01-executeGetCodio] entrada codigo: {} &quot;,codigo);</span>
+
+		String codigoSalida;
+<span class="fc bfc" id="L22" title="All 2 branches covered.">		if(codigo.equals(&quot;1&quot;)) {</span>
+<span class="fc" id="L23">			LOGGER.info(&quot;[PNDFRC01-executeGetCodio] entro a la opcion 1 &quot;);</span>
+<span class="fc" id="L24">			codigoSalida = this.applicationConfigurationService.getProperty(&quot;codigo&quot;);</span>
+<span class="fc" id="L25">			LOGGER.info(&quot;[PNDFRC01-executeGetCodio] entro1: {} &quot;,codigoSalida);</span>
+		}
+		else {
+<span class="fc" id="L28">			LOGGER.info(&quot; [PNDFRC01-executeGetCodio] entro a otras opciones &quot;);</span>
+<span class="fc" id="L29">			codigoSalida = &quot;0&quot;;</span>
+<span class="fc" id="L30">			LOGGER.info(&quot; [PNDFRC01-executeGetCodio]entro2: {} &quot;,codigoSalida);</span>
+		}
+
+<span class="fc" id="L33">		return codigoSalida;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

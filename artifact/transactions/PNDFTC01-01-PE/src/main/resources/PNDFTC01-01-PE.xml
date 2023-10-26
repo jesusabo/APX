@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<transaction xmlns="http://www.w3schools.com" transactionName="PNDFTC01" application="PNDF" version="01" country="PE" language="ES">
+	<paramsIn>
+		<parameter order="1" name="codigo" mandatory="1" type="String" size="10"/>
+	</paramsIn>
+	<paramsOut>
+		<parameter order="1" name="codigo" mandatory="1" type="String" size="10"/>
+	</paramsOut>
+	<description>MOSTRAR EL DOMINIO</description>
+</transaction>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="PNDFRC01" />
+        <module name="PNDFTC01-01-PE" />
+        <module name="PNDFRC01IMPL" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="PNDFC002" target="1.8" />
+      <module name="PNDFR005" target="1.8" />
+      <module name="PNDFR005IMPL" target="1.8" />
+      <module name="PNDFR006" target="1.8" />
+      <module name="PNDFR006IMPL" target="1.8" />
+      <module name="PNDFR007" target="1.8" />
+      <module name="PNDFR007IMPL" target="1.8" />
+      <module name="PNDFT005-01-PE" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

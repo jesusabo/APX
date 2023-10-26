@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PNDFTC0101PETransaction.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PNDFTC01-01-PE</a> &gt; <a href="index.source.html" class="el_package">com.bbva.pndf</a> &gt; <span class="el_source">PNDFTC0101PETransaction.java</span></div><h1>PNDFTC0101PETransaction.java</h1><pre class="source lang-java linenums">package com.bbva.pndf;
+
+import com.bbva.elara.domain.transaction.Severity;
+import com.bbva.elara.domain.transaction.response.HttpResponseCode;
+import com.bbva.pndf.lib.rc01.PNDFRC01;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * MOSTRAR EL DOMINIO
+ *
+ */
+<span class="fc" id="L13">public class PNDFTC0101PETransaction extends AbstractPNDFTC0101PETransaction {</span>
+
+<span class="fc" id="L15">	private static final Logger LOGGER = LoggerFactory.getLogger(PNDFTC0101PETransaction.class);</span>
+
+	/**
+	 * The execute method...
+	 */
+	@Override
+	public void execute() {
+<span class="fc" id="L22">		PNDFRC01 pndfRC01 = this.getServiceLibrary(PNDFRC01.class);</span>
+<span class="fc" id="L23">		String codigoSalida = pndfRC01.executeGetCodio(this.getCodigo());</span>
+
+<span class="fc" id="L25">		this.setCodigo(codigoSalida);</span>
+<span class="fc" id="L26">		this.setSeverity(Severity.OK);</span>
+<span class="fc" id="L27">		this.setHttpResponseCode(HttpResponseCode.HTTP_CODE_200, Severity.OK);</span>
+
+<span class="fc" id="L29">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
