@@ -1,5 +1,7 @@
 package com.bbva.pndf.lib.rc01;
 
+import com.bbva.pndf.dto.student.ResponseStudentDTO;
+
 /**
  * The  interface PNDFRC01 class...
  */
@@ -8,6 +10,8 @@ public interface PNDFRC01 {
 	/**
 	 * The execute method...
 	 */
-	String executeGetCodio(String codigo);
+	public ResponseStudentDTO executeGetStudent(String id, String grado);
+
+	public boolean executeActualizarEstado(String id);
 
 }

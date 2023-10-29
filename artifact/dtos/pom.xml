@@ -12,5 +12,7 @@
 	<version>2.0.23</version>
 	<packaging>pom</packaging>
 	<name>DTOS-eecc_search</name>
-	<modules/>
+	<modules>
+		<module>PNDFC001</module>
+	</modules>
 </project>

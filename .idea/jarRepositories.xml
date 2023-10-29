@@ -12,6 +12,11 @@
       <option name="url" value="https://repo.maven.apache.org/maven2" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="artifactory-APX" />
+      <option name="name" value="artifactory-APX" />
+      <option name="url" value="https://artifactory.globaldevtools.bbva.com:443/artifactory/gl-apx-dev-maven-virtual" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="artifactory-APX-dev" />
       <option name="name" value="artifactory-APX-dev" />
       <option name="url" value="https://artifactory.globaldevtools.bbva.com/artifactory/gl-apx-dev-maven-virtual" />
