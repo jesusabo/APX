@@ -24,7 +24,7 @@ public class PNDFTC0101PETransaction extends AbstractPNDFTC0101PETransaction {
 		String id = this.getId();
 		String grado = this.getGrado();
 
-		if(id!=null && !id.isEmpty() && grado!=null && !grado.isEmpty()){
+		if(validarNullOrEmpty(id,grado)){
 			ResponseStudentDTO responseStudentDTO = pndfRC01.executeGetStudent(id,grado);
 			if(responseStudentDTO!=null){
 				this.setAlumno(responseStudentDTO);
@@ -39,6 +39,15 @@ public class PNDFTC0101PETransaction extends AbstractPNDFTC0101PETransaction {
 			this.setSeverity(Severity.ENR);
 		}
 
+	}
+
+	private boolean validarNullOrEmpty(String... datos){
+		for(String dato : datos){
+			if(dato==null || dato.isEmpty()){
+				return false;
+			}
+		}
+		return true;
 	}
 
 }
