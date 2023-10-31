@@ -1,21 +1,24 @@
 package com.bbva.pndf;
 
 import com.bbva.elara.domain.transaction.Context;
+import com.bbva.elara.domain.transaction.Severity;
 import com.bbva.elara.domain.transaction.TransactionParameter;
 import com.bbva.elara.domain.transaction.request.TransactionRequest;
 import com.bbva.elara.domain.transaction.request.body.CommonRequestBody;
 import com.bbva.elara.domain.transaction.request.header.CommonRequestHeader;
+import com.bbva.elara.domain.transaction.response.HttpResponseCode;
 import com.bbva.elara.test.osgi.DummyBundleContext;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
 import javax.annotation.Resource;
+
+import com.bbva.pndf.dto.student.ResponseStudentDTO;
+import com.bbva.pndf.lib.rc01.PNDFRC01;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -41,6 +44,13 @@ public class PNDFTC0101PETransactionTest {
 	@Mock
 	private TransactionRequest transactionRequest;
 
+	private final HttpResponseCode[] finalResponseCode = {null};
+	private final Severity[] finalSeverity= {null};
+	@Mock
+	private PNDFRC01 libInt;
+	@Spy
+	private Context context;
+
 	@Before
 	public void initializeClass() throws Exception {
 		// Initializing mocks
@@ -48,11 +58,32 @@ public class PNDFTC0101PETransactionTest {
 		// Start BundleContext
 		this.transaction.start(bundleContext);
 		// Setting Context
-		this.transaction.setContext(new Context());
+		this.transaction.setContext(context);
+		this.transaction.getContext().setLanguageCode("ES");
+
+		transaction = new PNDFTC0101PETransaction() {
+			@Override
+			protected <T> T getServiceLibrary(Class<T> serviceInterface) {
+				return (T) libInt;
+			}
+
+			@Override
+			protected void setHttpResponseCode(HttpResponseCode httpStatusCode, Severity severity) {
+				finalResponseCode[0] = httpStatusCode;
+				finalSeverity[0] = severity;
+			}
+
+			@Override
+			protected Object getParameter(String field) {
+				return field.equals("accessParameters") ? new ArrayList<>() : super.getParameter(field);
+			}
+		};
 		// Set Body
+		transactionRequest = Mockito.mock(TransactionRequest.class);
 		CommonRequestBody commonRequestBody = new CommonRequestBody();
-		commonRequestBody.setTransactionParameters(new ArrayList<>());
+		commonRequestBody.setTransactionParameters(new ArrayList<TransactionParameter>());
 		this.transactionRequest.setBody(commonRequestBody);
+		Mockito.when(transactionRequest.getRestfulMethod()).thenReturn(null);
 		// Set Header Mock
 		this.transactionRequest.setHeader(header);
 		// Set TransactionRequest
@@ -61,10 +92,52 @@ public class PNDFTC0101PETransactionTest {
 
 	@Test
 	public void testNotNull(){
-	    // Example to Mock the Header
-		// Mockito.doReturn("ES").when(header).getHeaderParameter(RequestHeaderParamsName.COUNTRYCODE);
-		Assert.assertNotNull(this.transaction);
+		String id = "id";
+		String grado = "grado";
+		this.addParameter("id", id);
+		this.addParameter("grado", grado);
+		Mockito.when(libInt.executeGetStudent(id,grado)).thenReturn(new ResponseStudentDTO("x","x","x",new Date()));
 		this.transaction.execute();
+		Assert.assertEquals(0, this.transaction.getContext().getAdviceList().size());
+
+	}
+
+	@Test
+	public void testNotNull2(){
+		String id = "id";
+		String grado = "grado";
+		this.addParameter("id", id);
+		this.addParameter("grado", grado);
+		Mockito.when(libInt.executeGetStudent(id,grado)).thenReturn(new ResponseStudentDTO("x","x","x",new Date()));
+		this.transaction.execute();
+		Assert.assertEquals(0, this.transaction.getContext().getAdviceList().size());
+
+	}
+
+	@Test
+	public void testNull(){
+		String id = null;
+		String grado = null;
+		this.addParameter("id", id);
+		this.addParameter("grado", grado);
+		Mockito.when(libInt.executeGetStudent(id,grado)).thenReturn(null);
+		ResponseStudentDTO responseStudentDTO = libInt.executeGetStudent(id,grado);
+		this.transaction.execute();
+		Assert.assertNull(responseStudentDTO);
+		Assert.assertEquals(Severity.ENR, this.transaction.getSeverity());
+	}
+
+	@Test
+	public void testNull2(){
+		String id = "id";
+		String grado = "grado";
+		this.addParameter("id", id);
+		this.addParameter("grado", grado);
+		Mockito.when(libInt.executeGetStudent(id,grado)).thenReturn(null);
+		ResponseStudentDTO responseStudentDTO = libInt.executeGetStudent(id,grado);
+		this.transaction.execute();
+		Assert.assertNull(responseStudentDTO);
+		Assert.assertEquals(Severity.ENR, this.transaction.getSeverity());
 	}
 
 	// Add Parameter to Transaction

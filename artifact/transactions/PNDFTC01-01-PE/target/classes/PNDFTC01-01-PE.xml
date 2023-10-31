@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <transaction xmlns="http://www.w3schools.com" transactionName="PNDFTC01" application="PNDF" version="01" country="PE" language="ES">
 	<paramsIn>
-		<parameter order="1" name="codigo" mandatory="1" type="String" size="10"/>
+		<parameter order="1" name="id" mandatory="1" type="String" size="50"/>
+		<parameter order="2" name="grado" mandatory="1" type="String" size="10"/>
 	</paramsIn>
 	<paramsOut>
-		<parameter order="1" name="codigo" mandatory="1" type="String" size="10"/>
+		<dto order="1" name="alumno" mandatory="0" package="com.bbva.pndf.dto.student.ResponseStudentDTO" artifactId="PNDFC001">
+			<parameter order="1" name="id" mandatory="1" type="String" size="50"/>
+			<parameter order="2" name="nombre" mandatory="1" type="String" size="50"/>
+			<parameter order="3" name="grado" mandatory="1" type="String" size="10"/>
+			<parameter order="4" name="fecha_inscripcion" mandatory="1" type="Date (YYYY-MM-DD)" size="0"/>
+		</dto>
 	</paramsOut>
 	<description>MOSTRAR EL DOMINIO</description>
 </transaction>
